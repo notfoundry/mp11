@@ -9,6 +9,7 @@
 //  http://www.boost.org/LICENSE_1_0.txt
 
 #include <boost/mp11/utility.hpp>
+#include <boost/mp11/detail/mp_map_freeze.hpp>
 
 namespace boost
 {
@@ -31,6 +32,11 @@ template<template<class...> class M, class... T, class K> struct mp_map_find_imp
     using V = decltype( f((U*)0) );
 
     using type = typename V::type;
+};
+
+template<class... T, class K> struct mp_map_find_impl<mp_frozen_map<T...>, K>
+{
+    using type = decltype(detail::mp_frozen_map_find<T...>::f((K*)0));
 };
 
 } // namespace detail

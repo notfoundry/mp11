@@ -18,31 +18,51 @@ int main()
 {
     using boost::mp11::mp_map_find;
     using boost::mp11::mp_list;
+    using boost::mp11::mp_map_freeze;
 
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_list<>, char>, void>));
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<std::tuple<>, int>, void>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<mp_list<>>, char>, void>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<std::tuple<>>, char>, void>));
 
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_list<std::pair<int, int const>, std::pair<long, long const>>, char>, void>));
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_list<std::pair<int, int const>, std::pair<long, long const>>, int>, std::pair<int, int const>>));
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_list<std::pair<int, int const>, std::pair<long, long const>>, long>, std::pair<long, long const>>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<mp_list<std::pair<int, int const>, std::pair<long, long const>>>, char>, void>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<mp_list<std::pair<int, int const>, std::pair<long, long const>>>, int>, std::pair<int, int const>>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<mp_list<std::pair<int, int const>, std::pair<long, long const>>>, long>, std::pair<long, long const>>));
 
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<std::tuple<std::pair<int, int const>, std::pair<long, long const>>, char>, void>));
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<std::tuple<std::pair<int, int const>, std::pair<long, long const>>, int>, std::pair<int, int const>>));
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<std::tuple<std::pair<int, int const>, std::pair<long, long const>>, long>, std::pair<long, long const>>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<std::tuple<std::pair<int, int const>, std::pair<long, long const>>>, char>, void>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<std::tuple<std::pair<int, int const>, std::pair<long, long const>>>, int>, std::pair<int, int const>>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<std::tuple<std::pair<int, int const>, std::pair<long, long const>>>, long>, std::pair<long, long const>>));
 
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<std::pair<std::pair<int, int const>, std::pair<long, long const>>, char>, void>));
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<std::pair<std::pair<int, int const>, std::pair<long, long const>>, int>, std::pair<int, int const>>));
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<std::pair<std::pair<int, int const>, std::pair<long, long const>>, long>, std::pair<long, long const>>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<std::pair<std::pair<int, int const>, std::pair<long, long const>>>, char>, void>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<std::pair<std::pair<int, int const>, std::pair<long, long const>>>, int>, std::pair<int, int const>>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<std::pair<std::pair<int, int const>, std::pair<long, long const>>>, long>, std::pair<long, long const>>));
 
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_list<mp_list<int>, mp_list<long, long>, mp_list<long long, long long, long long>>, char>, void>));
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_list<mp_list<int>, mp_list<long, long>, mp_list<long long, long long, long long>>, int>, mp_list<int>>));
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_list<mp_list<int>, mp_list<long, long>, mp_list<long long, long long, long long>>, long>, mp_list<long, long>>));
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_list<mp_list<int>, mp_list<long, long>, mp_list<long long, long long, long long>>, long long>, mp_list<long long, long long, long long>>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<mp_list<mp_list<int>, mp_list<long, long>, mp_list<long long, long long, long long>>>, char>, void>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<mp_list<mp_list<int>, mp_list<long, long>, mp_list<long long, long long, long long>>>, int>, mp_list<int>>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<mp_list<mp_list<int>, mp_list<long, long>, mp_list<long long, long long, long long>>>, long>, mp_list<long, long>>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<mp_list<mp_list<int>, mp_list<long, long>, mp_list<long long, long long, long long>>>, long long>, mp_list<long long, long long, long long>>));
 
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<std::tuple<mp_list<int>, std::pair<long, long>, std::tuple<long long, long long, long long>>, char>, void>));
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<std::tuple<mp_list<int>, std::pair<long, long>, std::tuple<long long, long long, long long>>, int>, mp_list<int>>));
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<std::tuple<mp_list<int>, std::pair<long, long>, std::tuple<long long, long long, long long>>, long>, std::pair<long, long>>));
     BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<std::tuple<mp_list<int>, std::pair<long, long>, std::tuple<long long, long long, long long>>, long long>, std::tuple<long long, long long, long long>>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<std::tuple<mp_list<int>, std::pair<long, long>, std::tuple<long long, long long, long long>>>, char>, void>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<std::tuple<mp_list<int>, std::pair<long, long>, std::tuple<long long, long long, long long>>>, int>, mp_list<int>>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<std::tuple<mp_list<int>, std::pair<long, long>, std::tuple<long long, long long, long long>>>, long>, std::pair<long, long>>));
+    BOOST_TEST_TRAIT_TRUE((std::is_same<mp_map_find<mp_map_freeze<std::tuple<mp_list<int>, std::pair<long, long>, std::tuple<long long, long long, long long>>>, long long>, std::tuple<long long, long long, long long>>));
 
     return boost::report_errors();
 }
